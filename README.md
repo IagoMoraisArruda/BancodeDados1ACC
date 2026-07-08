@@ -14,13 +14,13 @@ Uma aplicação desktop em Java (**JDBC puro, sem ORM**) integrada ao banco de d
 
 ## 🗺️ Sumário
 - [📦 Estrutura do Projeto](#estrutura-do-projeto)
-- [🎮 Modos de Execução (Classes Main)](#modos-de-execução-classes-main)
-- [📊 Consultas Gerenciais Disponíveis](#consultas-gerenciais-disponíveis)
-- [🔒 Segurança das Credenciais](#segurança-das-credenciais)
+- [🎮 Modos de Execucao](#modos-de-execucao)
+- [📊 Consultas Gerenciais Disponiveis](#consultas-gerenciais-disponiveis)
+- [🔒 Seguranca das Credenciais](#seguranca-das-credenciais)
 
 ---
 
-## 📦 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```text
 ProdutoACC/
