@@ -32,7 +32,7 @@ ProdutoACC/
     └── mainCadastros.java       --> Menu COMPLETO (Cadastros 1-10 + Consultas 11-22)
 
   ```
-> Este repositório ** inclui** o driver JDBC do MySQL (`mysql-connector-j-x.x.x.jar`) no código fonte a versão que foi utilizada para criar o codigo. É necessário possuir o arquivo `.jar` localmente para configurar o projeto seguindo os passos abaixo.
+> Este repositório ** inclui** o driver JDBC do MySQL (`mysql-connector-j-9.7.0`) no código fonte a versão que foi utilizada para criar o codigo. É necessário possuir o arquivo `.jar` localmente para configurar o projeto seguindo os passos abaixo.
 
 ## 🛠️ Pré-requisitos
 
