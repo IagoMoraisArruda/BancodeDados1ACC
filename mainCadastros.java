@@ -37,13 +37,13 @@ public class mainCadastros {
                             String matricula = sc.nextLine();
                             ConsultasGerenciais.documentosPorAluno(conn, matricula);
                             break;
-                        case "16": ConsultasGerenciais.atividadesAguardandoValidacao(conn); break;
+                        /* case "16": ConsultasGerenciais.atividadesAguardandoValidacao(conn); break;
                         case "17": ConsultasGerenciais.tiposComMaiorParticipacao(conn); break;
                         case "18": ConsultasGerenciais.atividadesPorPeriodoLetivo(conn); break;
                         case "19": ConsultasGerenciais.instituicoesMaisFrequentes(conn); break;
                         case "20": ConsultasGerenciais.professoresQueMaisValidaram(conn); break;
-                        case "21": ConsultasGerenciais.atividadesRejeitadas(conn); break;
-                        case "22": ConsultasGerenciais.executarSQLPersonalizada(conn, sc);break;
+                        case "21": ConsultasGerenciais.atividadesRejeitadas(conn); break; */
+                        case "16": ConsultasGerenciais.executarSQLPersonalizada(conn, sc);break;
 
                         case "0":
                             rodando = false;
@@ -82,7 +82,7 @@ public class mainCadastros {
         System.out.println("8  - Cadastrar Atividade ACC (do aluno)");
         System.out.println("9  - Cadastrar Documento (comprovante)");
         System.out.println("10 - Registrar Validação (professor avalia atividade)");
-        System.out.println("--- CONSULTAS GERENCIAIS ---");
+        /* System.out.println("--- CONSULTAS GERENCIAIS ---");
         System.out.println("11 - Pontuação acumulada por aluno");
         System.out.println("12 - Alunos que atingiram a pontuação mínima");
         System.out.println("13 - Alunos com pendências");
@@ -93,8 +93,8 @@ public class mainCadastros {
         System.out.println("18 - Atividades por período letivo");
         System.out.println("19 - Instituições que mais emitiram documentos");
         System.out.println("20 - Professores que mais validaram atividades");
-        System.out.println("21 - Atividades rejeitadas");
-        System.out.println("22 - Executar SQL personalizada");
+        System.out.println("21 - Atividades rejeitadas"); */
+        System.out.println("11 - Executar SQL personalizada");
         System.out.println("0  - Sair");
         System.out.print("Escolha uma opção: ");
     }
