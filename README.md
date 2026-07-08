@@ -32,8 +32,7 @@ ProdutoACC/
     └── mainCadastros.java       --> Menu COMPLETO (Cadastros 1-10 + Consultas 11-22)
 
   ```
- > [!IMPORTANT]
-> Este repositório **não inclui** o driver JDBC do MySQL (`mysql-connector-j-x.x.x.jar`) no código fonte. É necessário possuir o arquivo `.jar` localmente para configurar o projeto seguindo os passos abaixo.
+> Este repositório ** inclui** o driver JDBC do MySQL (`mysql-connector-j-x.x.x.jar`) no código fonte a versão que foi utilizada para criar o codigo. É necessário possuir o arquivo `.jar` localmente para configurar o projeto seguindo os passos abaixo.
 
 ## 🛠️ Pré-requisitos
 
@@ -43,29 +42,20 @@ ProdutoACC/
 
 ---
 
-## 🚀 Como Configurar e Executar o Projeto
-
-### Passo 1 — Organizar o Driver JDBC no Projeto
-Para que o projeto funcione corretamente, o arquivo do driver deve ser inserido na estrutura de pastas da aplicação:
-
-1. Na raiz do projeto `ProdutoACC/`, crie uma pasta chamada `lib` (caso ela já não exista).
-2. Adicione o seu arquivo `mysql-connector-j-x.x.x.jar` dentro dessa pasta `lib`.
-   *(Caso não possua o driver, ele pode ser baixado gratuitamente no site oficial da MySQL).*
-
-### Passo 2 — Adicionar o Driver como Biblioteca no IntelliJ
+### Passo 1 — Adicionar o Driver como Biblioteca no IntelliJ
 O IntelliJ precisa mapear esse arquivo para permitir a compilação das classes de conexão.
 
 1. Abra o projeto dentro do IntelliJ IDEA.
 2. Acesse o menu **File** ➡️ **Project Structure** (ou utilize o atalho `Ctrl + Alt + Shift + S`).
 3. No menu lateral esquerdo, selecione a aba **Libraries**.
 4. Clique no botão de adição **"+"** no topo da lista ➡️ escolha **Java**.
-5. Navegue até a pasta `lib` do seu projeto e selecione o arquivo `mysql-connector-j-x.x.x.jar`.
+5. Selecione o arquivo `mysql-connector-j-x.x.x.jar`.
 6. Clique em **OK** e depois em **Apply**.
 
 > [!NOTE]
 > Sem este passo, o projeto não compilará, pois a classe `ConexaoBD` depende diretamente deste driver para se comunicar com o banco de dados.
 
-### Passo 3 — Configurar a conexão com o banco
+### Passo 2 — Configurar a conexão com o banco
 Abra o arquivo `src/ConexaoBD.java`. Os campos com os parâmetros de conexão estão propositalmente vazios por questões de segurança e privacidade:
 
 ```java
