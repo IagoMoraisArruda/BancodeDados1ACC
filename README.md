@@ -31,7 +31,8 @@ ProdutoACC/
     ├── Main.java                --> Menu ENXUTO (Apenas Consultas. Ideal para a apresentação)
     └── mainCadastros.java       --> Menu COMPLETO (Cadastros 1-10 + Consultas 11-22)
 
-    > [!IMPORTANT]
+  ```
+  > [!IMPORTANT]
 > Este repositório **não inclui** o driver JDBC do MySQL (`mysql-connector-j-x.x.x.jar`). Ele precisa ser guardado localmente na pasta do projeto conforme os passos abaixo.
 
 ## 🛠️ Pré-requisitos
