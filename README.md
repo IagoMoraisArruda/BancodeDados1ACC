@@ -69,5 +69,5 @@ Abra o arquivo `src/ConexaoBD.java`. Os campos com os parâmetros de conexão es
 
 ```java
 private static final String HOST = "";     // ex: [acc-unifesspa-bd.mysql.database.azure.com:3306/nome_do_banco](https://acc-unifesspa-bd.mysql.database.azure.com:3306/nome_do_banco)
-private static final String USUARIO = "";  // ex: admin_acc
+private static final String USUARIO = "";  // ex: adminacc1
 private static final String SENHA = "";    // senha do usuário correspondente
