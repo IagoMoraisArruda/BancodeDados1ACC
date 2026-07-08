@@ -28,7 +28,7 @@ public class mainCadastros {
                         case "8": Cadastros.cadastrarAtividadeAcc(conn, sc); break;
                         case "9": Cadastros.cadastrarDocumento(conn, sc); break;
                         case "10": Cadastros.cadastrarValidacao(conn, sc); break;
-                        case "11": ConsultasGerenciais.pontuacaoAcumuladaPorAluno(conn); break;
+                         /* case "11": ConsultasGerenciais.pontuacaoAcumuladaPorAluno(conn); break;
                         case "12": ConsultasGerenciais.alunosComPontuacaoMinimaAtingida(conn); break;
                         case "13": ConsultasGerenciais.alunosComPendencias(conn); break;
                         case "14": ConsultasGerenciais.categoriasMaisFrequentes(conn); break;
@@ -37,13 +37,13 @@ public class mainCadastros {
                             String matricula = sc.nextLine();
                             ConsultasGerenciais.documentosPorAluno(conn, matricula);
                             break;
-                        /* case "16": ConsultasGerenciais.atividadesAguardandoValidacao(conn); break;
+                         case "16": ConsultasGerenciais.atividadesAguardandoValidacao(conn); break;
                         case "17": ConsultasGerenciais.tiposComMaiorParticipacao(conn); break;
                         case "18": ConsultasGerenciais.atividadesPorPeriodoLetivo(conn); break;
                         case "19": ConsultasGerenciais.instituicoesMaisFrequentes(conn); break;
                         case "20": ConsultasGerenciais.professoresQueMaisValidaram(conn); break;
                         case "21": ConsultasGerenciais.atividadesRejeitadas(conn); break; */
-                        case "16": ConsultasGerenciais.executarSQLPersonalizada(conn, sc);break;
+                        case "11": ConsultasGerenciais.executarSQLPersonalizada(conn, sc);break;
 
                         case "0":
                             rodando = false;
