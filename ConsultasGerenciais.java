@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class ConsultasGerenciais {
 
-    // Mantido para todas as consultas estáticas (sem parâmetros)
+    
     private static void executarEImprimirCru(Connection conn, String sql) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -11,7 +11,6 @@ public class ConsultasGerenciais {
         }
     }
 
-    // Método responsável unicamente por formatar e imprimir qualquer ResultSet
     private static void imprimirResultSetCru(ResultSet rs) throws SQLException {
         ResultSetMetaData meta = rs.getMetaData();
         int colCount = meta.getColumnCount();
@@ -90,7 +89,6 @@ public class ConsultasGerenciais {
         executarEImprimirCru(conn, sql);
     }
 
-    // ALTERADO: Agora executa internamente e passa o ResultSet direto para a impressão
     public static void documentosPorAluno(Connection conn, String matricula) throws SQLException {
         String sql =
                 "SELECT a.Nome, d.NomeArquivo, d.TipoDocumento, d.DataEnvio, i.Nome AS InstituicaoEmissora " +
