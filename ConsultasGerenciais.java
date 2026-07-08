@@ -1,24 +1,17 @@
 import java.sql.*;
 import java.util.Scanner;
 
-
 public class ConsultasGerenciais {
 
+    // Mantido para todas as consultas estáticas (sem parâmetros)
     private static void executarEImprimirCru(Connection conn, String sql) throws SQLException {
-
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             imprimirResultSetCru(rs);
         }
     }
 
-    private static void executarEImprimirCru(String sql, PreparedStatement stmt) throws SQLException {
-
-        try (ResultSet rs = stmt.executeQuery()) {
-            imprimirResultSetCru(rs);
-        }
-    }
-
+    // Método responsável unicamente por formatar e imprimir qualquer ResultSet
     private static void imprimirResultSetCru(ResultSet rs) throws SQLException {
         ResultSetMetaData meta = rs.getMetaData();
         int colCount = meta.getColumnCount();
@@ -97,6 +90,7 @@ public class ConsultasGerenciais {
         executarEImprimirCru(conn, sql);
     }
 
+    // ALTERADO: Agora executa internamente e passa o ResultSet direto para a impressão
     public static void documentosPorAluno(Connection conn, String matricula) throws SQLException {
         String sql =
                 "SELECT a.Nome, d.NomeArquivo, d.TipoDocumento, d.DataEnvio, i.Nome AS InstituicaoEmissora " +
@@ -106,9 +100,13 @@ public class ConsultasGerenciais {
                         "JOIN Instituicao i ON i.idInstituicao = d.Instituicao_idInstituicao " +
                         "WHERE a.Matricula = ? " +
                         "ORDER BY d.DataEnvio DESC";
+
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, matricula);
-            executarEImprimirCru(sql.replace("?", "'" + matricula + "'"), stmt);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                imprimirResultSetCru(rs);
+            }
         }
     }
 
@@ -174,8 +172,8 @@ public class ConsultasGerenciais {
                         "ORDER BY v.DataValidacao DESC";
         executarEImprimirCru(conn, sql);
     }
-    public static void executarSQLPersonalizada(Connection conn, Scanner sc) {
 
+    public static void executarSQLPersonalizada(Connection conn, Scanner sc) {
         System.out.println("\n========================================");
         System.out.println(" TERMINAL SQL");
         System.out.println("========================================");
@@ -187,11 +185,8 @@ public class ConsultasGerenciais {
         StringBuilder sqlBuilder = new StringBuilder();
 
         while (true) {
-
             String linha = sc.nextLine();
-
             sqlBuilder.append(linha).append("\n");
-
             if (linha.trim().endsWith(";")) {
                 break;
             }
@@ -209,15 +204,11 @@ public class ConsultasGerenciais {
         }
 
         try (Statement stmt = conn.createStatement()) {
-
             boolean possuiResultado = stmt.execute(sql);
 
             if (possuiResultado) {
-
                 try (ResultSet rs = stmt.getResultSet()) {
-
                     ResultSetMetaData meta = rs.getMetaData();
-
                     int colunas = meta.getColumnCount();
 
                     for (int i = 1; i <= colunas; i++) {
@@ -228,39 +219,28 @@ public class ConsultasGerenciais {
                     System.out.println("-".repeat(Math.min(colunas * 25, 150)));
 
                     int linhas = 0;
-
                     while (rs.next()) {
-
                         for (int i = 1; i <= colunas; i++) {
                             Object valor = rs.getObject(i);
                             System.out.printf("%-25s", valor == null ? "NULL" : valor);
                         }
-
                         System.out.println();
                         linhas++;
                     }
 
                     System.out.println("-".repeat(Math.min(colunas * 25, 150)));
                     System.out.println("Total de linhas retornadas: " + linhas);
-
                 }
-
             } else {
-
                 System.out.println();
                 System.out.println("Comando executado com sucesso.");
                 System.out.println("Linhas afetadas: " + stmt.getUpdateCount());
-
             }
 
         } catch (SQLException e) {
-
             System.out.println();
             System.out.println("Erro ao executar SQL:");
             System.out.println(e.getMessage());
-
         }
-
     }
-
 }
