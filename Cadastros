@@ -1,0 +1,284 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.Scanner;
+
+public class Cadastros {
+
+    public static void cadastrarCurso(Connection conn, Scanner sc) throws SQLException {
+        System.out.print("Nome do curso: ");
+        String nome = sc.nextLine();
+        System.out.print("Carga horária exigida de ACC (em horas): ");
+        int cargaExigida = Integer.parseInt(sc.nextLine());
+
+        String sql = "INSERT INTO Curso (NomeCurso, CargaHorariaExigida) VALUES (?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.setInt(2, cargaExigida);
+            stmt.executeUpdate();
+            System.out.println("Curso cadastrado com sucesso!");
+        }
+    }
+
+    public static void cadastrarAluno(Connection conn, Scanner sc) throws SQLException {
+        listarCursos(conn);
+        System.out.print("ID do curso do aluno: ");
+        int idCurso = Integer.parseInt(sc.nextLine());
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+
+        String sql = "INSERT INTO Aluno (Matricula, Nome, Email, Curso_idCurso) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, matricula);
+            stmt.setString(2, nome);
+            stmt.setString(3, email);
+            stmt.setInt(4, idCurso);
+            stmt.executeUpdate();
+            System.out.println("Aluno cadastrado com sucesso!");
+        }
+    }
+
+    public static void cadastrarPeriodoLetivo(Connection conn, Scanner sc) throws SQLException {
+        System.out.print("Semestre (1 ou 2): ");
+        String semestre = sc.nextLine();
+        System.out.print("Ano (ex: 2026): ");
+        int ano = Integer.parseInt(sc.nextLine());
+
+        String sql = "INSERT INTO PeriodoLetivo (Semestre, Ano) VALUES (?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, semestre);
+            stmt.setInt(2, ano);
+            stmt.executeUpdate();
+            System.out.println("Período letivo cadastrado com sucesso!");
+        }
+    }
+
+    public static void cadastrarCategoriaAcc(Connection conn, Scanner sc) throws SQLException {
+        System.out.print("Categoria (Ensino, Pesquisa, Extensão, VivenciaAcademica): ");
+        String tipoCategoria = sc.nextLine();
+        System.out.print("Descrição: ");
+        String descricao = sc.nextLine();
+
+        String sql = "INSERT INTO CategoriaAcc (TipoCategoria, Descricao) VALUES (?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, tipoCategoria);
+            stmt.setString(2, descricao);
+            stmt.executeUpdate();
+            System.out.println("Categoria cadastrada com sucesso!");
+        }
+    }
+
+    public static void cadastrarTipoAcc(Connection conn, Scanner sc) throws SQLException {
+        listarCategorias(conn);
+        System.out.print("ID da categoria: ");
+        int idCategoria = Integer.parseInt(sc.nextLine());
+        System.out.print("Inciso (ex: I, II, III): ");
+        String inciso = sc.nextLine();
+        System.out.print("Nome do tipo: ");
+        String nomeTipo = sc.nextLine();
+        System.out.print("Descrição: ");
+        String descricao = sc.nextLine();
+        System.out.print("Pontuação máxima: ");
+        double pontuacaoMaxima = Double.parseDouble(sc.nextLine());
+
+        String sql = "INSERT INTO TipoACC (CategoriaAcc_idCategoriaAcc, Inciso, NomeTipo, Descricao, PontuacaoMaxima) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idCategoria);
+            stmt.setString(2, inciso);
+            stmt.setString(3, nomeTipo);
+            stmt.setString(4, descricao);
+            stmt.setDouble(5, pontuacaoMaxima);
+            stmt.executeUpdate();
+            System.out.println("Tipo de ACC cadastrado com sucesso!");
+        }
+    }
+
+    public static void cadastrarInstituicao(Connection conn, Scanner sc) throws SQLException {
+        System.out.print("Tipo de entidade (UNIVERSIDADE, EMPRESA, ONG, ÓRGÃO PÚBLICO, ASSOCIAÇÃO, ESCOLA, FUNDAÇÃO, OUTRO): ");
+        String tipoEntidade = sc.nextLine();
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("CNPJ: ");
+        String cnpj = sc.nextLine();
+        System.out.print("Cidade: ");
+        String cidade = sc.nextLine();
+        System.out.print("Estado (UF, 2 letras): ");
+        String estado = sc.nextLine();
+
+        String sql = "INSERT INTO Instituicao (TipoEntidade, Nome, CNPJ, Cidade, Estado) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, tipoEntidade);
+            stmt.setString(2, nome);
+            stmt.setString(3, cnpj);
+            stmt.setString(4, cidade);
+            stmt.setString(5, estado);
+            stmt.executeUpdate();
+            System.out.println("Instituição cadastrada com sucesso!");
+        }
+    }
+
+    public static void cadastrarProfessor(Connection conn, Scanner sc) throws SQLException {
+        System.out.print("SIAPE: ");
+        String siape = sc.nextLine();
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Departamento: ");
+        String departamento = sc.nextLine();
+
+        String sql = "INSERT INTO Professor (Siape, Nome, Email, Departamento) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, siape);
+            stmt.setString(2, nome);
+            stmt.setString(3, email);
+            stmt.setString(4, departamento);
+            stmt.executeUpdate();
+            System.out.println("Professor cadastrado com sucesso!");
+        }
+    }
+
+    public static void cadastrarAtividadeAcc(Connection conn, Scanner sc) throws SQLException {
+        listarAlunos(conn);
+        System.out.print("ID do aluno: ");
+        int idAluno = Integer.parseInt(sc.nextLine());
+        listarTiposAcc(conn);
+        System.out.print("ID do tipo de ACC: ");
+        int idTipoAcc = Integer.parseInt(sc.nextLine());
+        listarPeriodos(conn);
+        System.out.print("ID do período letivo: ");
+        int idPeriodo = Integer.parseInt(sc.nextLine());
+        System.out.print("Título da atividade: ");
+        String titulo = sc.nextLine();
+        System.out.print("Descrição: ");
+        String descricao = sc.nextLine();
+        System.out.print("Data de realização (AAAA-MM-DD): ");
+        String data = sc.nextLine();
+        System.out.print("Carga horária (em horas): ");
+        double cargaHoraria = Double.parseDouble(sc.nextLine());
+        System.out.print("Pontos solicitados: ");
+        double pontosSolicitados = Double.parseDouble(sc.nextLine());
+
+        String sql = "INSERT INTO AtividadeACC " +
+                "(Aluno_idAluno, TipoACC_idTipoACC, PeriodoLetivo_idPeriodo, Titulo, Descricao, DataRealizacao, CargaHoraria, PontosSolicitados) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idTipoAcc);
+            stmt.setInt(3, idPeriodo);
+            stmt.setString(4, titulo);
+            stmt.setString(5, descricao);
+            stmt.setDate(6, java.sql.Date.valueOf(data));
+            stmt.setDouble(7, cargaHoraria);
+            stmt.setDouble(8, pontosSolicitados);
+            stmt.executeUpdate();
+            System.out.println("Atividade cadastrada com sucesso!");
+        }
+    }
+
+    public static void cadastrarDocumento(Connection conn, Scanner sc) throws SQLException {
+        listarAtividades(conn);
+        System.out.print("ID da atividade: ");
+        int idAtividade = Integer.parseInt(sc.nextLine());
+        listarInstituicoes(conn);
+        System.out.print("ID da instituição emissora: ");
+        int idInstituicao = Integer.parseInt(sc.nextLine());
+        System.out.print("Nome do arquivo: ");
+        String nomeArquivo = sc.nextLine();
+        System.out.print("Tipo de documento (CERTIFICADO, DECLARACAO, CONTRATO, ATA, COMPROVANTE, OUTRO): ");
+        String tipoDocumento = sc.nextLine();
+
+        String sql = "INSERT INTO Documento (AtividadeACC_idAtividadeACC, Instituicao_idInstituicao, NomeArquivo, TipoDocumento, DataEnvio) " +
+                "VALUES (?, ?, ?, ?, NOW())";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAtividade);
+            stmt.setInt(2, idInstituicao);
+            stmt.setString(3, nomeArquivo);
+            stmt.setString(4, tipoDocumento);
+            stmt.executeUpdate();
+            System.out.println("Documento cadastrado com sucesso!");
+        }
+    }
+
+    public static void cadastrarValidacao(Connection conn, Scanner sc) throws SQLException {
+        listarAtividades(conn);
+        System.out.print("ID da atividade: ");
+        int idAtividade = Integer.parseInt(sc.nextLine());
+        listarProfessores(conn);
+        System.out.print("ID do professor: ");
+        int idProfessor = Integer.parseInt(sc.nextLine());
+        System.out.print("Pontos aprovados: ");
+        double pontosAprovados = Double.parseDouble(sc.nextLine());
+        System.out.print("Status (PENDENTE, EM_ANALISE, APROVADO, REJEITADO): ");
+        String status = sc.nextLine();
+
+        String sql = "INSERT INTO Validacao (AtividadeACC_idAtividadeACC, Professor_idProfessor, DataValidacao, PontosAprovados, StatusValidacao) " +
+                "VALUES (?, ?, NOW(), ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAtividade);
+            stmt.setInt(2, idProfessor);
+            stmt.setDouble(3, pontosAprovados);
+            stmt.setString(4, status);
+            stmt.executeUpdate();
+            System.out.println("Validação registrada com sucesso!");
+        }
+    }
+
+
+
+    private static void listarCursos(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idCurso, NomeCurso FROM Curso");
+    }
+
+    private static void listarAlunos(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idAluno, Nome, Matricula FROM Aluno");
+    }
+
+    private static void listarCategorias(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idCategoriaAcc, TipoCategoria FROM CategoriaAcc");
+    }
+
+    private static void listarTiposAcc(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idTipoACC, NomeTipo FROM TipoACC");
+    }
+
+    private static void listarPeriodos(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idPeriodo, Ano, Semestre FROM PeriodoLetivo");
+    }
+
+    private static void listarInstituicoes(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idInstituicao, Nome FROM Instituicao");
+    }
+
+    private static void listarProfessores(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idProfessor, Nome FROM Professor");
+    }
+
+    private static void listarAtividades(Connection conn) throws SQLException {
+        imprimirTabelaSimples(conn, "SELECT idAtividadeACC, Titulo FROM AtividadeACC");
+    }
+
+
+    private static void imprimirTabelaSimples(Connection conn, String sql) throws SQLException {
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            int colCount = rs.getMetaData().getColumnCount();
+            System.out.println("--- Registros disponíveis ---");
+            while (rs.next()) {
+                StringBuilder linha = new StringBuilder();
+                for (int i = 1; i <= colCount; i++) {
+                    linha.append(rs.getMetaData().getColumnName(i)).append("=").append(rs.getString(i)).append("  ");
+                }
+                System.out.println(linha);
+            }
+            System.out.println("------------------------------");
+        }
+    }
+}
