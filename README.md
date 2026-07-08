@@ -1,4 +1,4 @@
-# 🎓 Sistema de Gestão de ACC — Unifesspa
+# Sistema de Gestao de ACC - Unifesspa
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
@@ -8,15 +8,15 @@
 
 Uma aplicação desktop em Java (**JDBC puro, sem ORM**) integrada ao banco de dados MySQL para gerenciar Atividades Curriculares Complementares (ACC) de alunos. O sistema cobre desde o cadastro de cursos e documentos comprobatórios até a validação por professores e consultas gerenciais complexas.
 
-> 📌 **Contexto do Projeto:** Desenvolvido como o **Produto 2** da disciplina de Banco de Dados I, da Faculdade de Sistemas de Informação (Unifesspa), sob a orientação do Prof. Dr. Hugo Kuribayashi. *(O Produto 1 consiste no modelo de banco de dados em arquivo `.mwb` separado)*.
+> **Contexto do Projeto:** Desenvolvido como o **Produto 2** da disciplina de Banco de Dados I, da Faculdade de Sistemas de Informação (Unifesspa), sob a orientação do Prof. Dr. Hugo Kuribayashi. *(O Produto 1 consiste no modelo de banco de dados em arquivo `.mwb` separado)*.
 
 ---
 
-## 🗺️ Sumário
-- [📦 Estrutura do Projeto](#estrutura-do-projeto)
-- [🎮 Modos de Execucao](#modos-de-execucao)
-- [📊 Consultas Gerenciais Disponiveis](#consultas-gerenciais-disponiveis)
-- [🔒 Seguranca das Credenciais](#seguranca-das-credenciais)
+## Sumario
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Modos de Execucao](#modos-de-execucao)
+- [Consultas Gerenciais Disponiveis](#consultas-gerenciais-disponiveis)
+- [Seguranca das Credenciais](#seguranca-das-credenciais)
 
 ---
 
