@@ -32,8 +32,8 @@ ProdutoACC/
     └── mainCadastros.java       --> Menu COMPLETO (Cadastros 1-10 + Consultas 11-22)
 
   ```
-  > [!IMPORTANT]
-> Este repositório **não inclui** o driver JDBC do MySQL (`mysql-connector-j-x.x.x.jar`). Ele precisa ser guardado localmente na pasta do projeto conforme os passos abaixo.
+ > [!IMPORTANT]
+> Este repositório **não inclui** o driver JDBC do MySQL (`mysql-connector-j-x.x.x.jar`) no código fonte. É necessário possuir o arquivo `.jar` localmente para configurar o projeto seguindo os passos abaixo.
 
 ## 🛠️ Pré-requisitos
 
@@ -46,10 +46,11 @@ ProdutoACC/
 ## 🚀 Como Configurar e Executar o Projeto
 
 ### Passo 1 — Organizar o Driver JDBC no Projeto
-Como você já possui o arquivo do driver baixado, coloque-o dentro da estrutura do projeto para mantê-lo organizado:
+Para que o projeto funcione corretamente, o arquivo do driver deve ser inserido na estrutura de pastas da aplicação:
 
 1. Na raiz do projeto `ProdutoACC/`, crie uma pasta chamada `lib` (caso ela já não exista).
-2. Cole o seu arquivo `mysql-connector-j-x.x.x.jar` dentro dessa pasta `lib`.
+2. Adicione o seu arquivo `mysql-connector-j-x.x.x.jar` dentro dessa pasta `lib`.
+   *(Caso não possua o driver, ele pode ser baixado gratuitamente no site oficial da MySQL).*
 
 ### Passo 2 — Adicionar o Driver como Biblioteca no IntelliJ
 O IntelliJ precisa mapear esse arquivo para permitir a compilação das classes de conexão.
@@ -62,12 +63,12 @@ O IntelliJ precisa mapear esse arquivo para permitir a compilação das classes 
 6. Clique em **OK** e depois em **Apply**.
 
 > [!NOTE]
-> Sem esse passo, o projeto não compilará, pois a classe `ConexaoBD` depende diretamente deste driver para se comunicar com o banco de dados.
+> Sem este passo, o projeto não compilará, pois a classe `ConexaoBD` depende diretamente deste driver para se comunicar com o banco de dados.
 
 ### Passo 3 — Configurar a conexão com o banco
-Abra o arquivo `src/ConexaoBD.java`. Os campos com os parâmetros de conexão estão propositalmente vazios por questões de privacidade:
+Abra o arquivo `src/ConexaoBD.java`. Os campos com os parâmetros de conexão estão propositalmente vazios por questões de segurança e privacidade:
 
 ```java
 private static final String HOST = "";     // ex: [acc-unifesspa-bd.mysql.database.azure.com:3306/nome_do_banco](https://acc-unifesspa-bd.mysql.database.azure.com:3306/nome_do_banco)
-private static final String USUARIO = "";  // ex: adminacc1
+private static final String USUARIO = "";  // ex: admin_acc1
 private static final String SENHA = "";    // senha do usuário correspondente
